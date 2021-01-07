@@ -10,6 +10,7 @@ import androidx.compose.state
 import demos.Inputs
 import demos.Todo
 import demos.ripple.RippleDemo
+import demos.tictactoe.CanvasExample
 import demos.tictactoe.Counter
 import demos.tictactoe.EmojiWar
 import demos.tictactoe.TicTacToeView
@@ -34,6 +35,7 @@ val allDemos: List<Demo> = listOf(
     Demo("Emoji War") { EmojiWar() },
     Demo("Todo") { Todo() },
     Demo("Inputs") { Inputs() },
+    Demo("Canvas") { CanvasExample() },
 )
 
 @Composable

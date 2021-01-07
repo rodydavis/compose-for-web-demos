@@ -5,6 +5,7 @@ import androidx.compose.DomComposer
 import androidx.compose.SourceLocation
 import androidx.compose.currentComposer
 import androidx.compose.*
+import org.w3c.dom.CanvasRenderingContext2D
 import org.w3c.dom.Element
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.css.CSSStyleDeclaration
@@ -182,4 +183,27 @@ fun Checkbox(
     onChange: ((e: Event) -> Unit)? = null,
 ) {
     Checkbox(label, state { value }, onChange)
+}
+
+val canvas = SourceLocation("canvas")
+
+@Composable
+fun Canvas(
+    width: Number,
+    height: Number,
+    paint: ((ctx: CanvasRenderingContext2D) -> Unit),
+) {
+    val composer = (currentComposer as DomComposer)
+    composer.emit(
+        canvas,
+        {
+            composer.document.createElement("canvas").also { element ->
+                element.setAttribute("width", "$width")
+                element.setAttribute("height", "$height")
+                val context2D = element.asDynamic().getContext("2d")
+                paint(context2D as CanvasRenderingContext2D)
+             }
+        },
+        {  }
+    )
 }
