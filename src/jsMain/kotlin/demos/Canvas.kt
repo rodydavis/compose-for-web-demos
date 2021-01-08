@@ -15,7 +15,7 @@ import html.Text
 
 @Composable
 fun CanvasExample() {
-    Canvas(400, 400) { ctx ->
+    Canvas(400.0, 400.0) { ctx ->
         // Create gradient
         val grd = ctx.createRadialGradient(7.0, 50.0, 5.0, 90.0, 60.0, 100.0)
         grd.addColorStop(0.0, "red")

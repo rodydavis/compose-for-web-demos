@@ -189,8 +189,8 @@ val canvas = SourceLocation("canvas")
 
 @Composable
 fun Canvas(
-    width: Number,
-    height: Number,
+    width: Double,
+    height: Double,
     paint: ((ctx: CanvasRenderingContext2D) -> Unit),
 ) {
     val composer = (currentComposer as DomComposer)
@@ -200,8 +200,11 @@ fun Canvas(
             composer.document.createElement("canvas").also { element ->
                 element.setAttribute("width", "$width")
                 element.setAttribute("height", "$height")
-                val context2D = element.asDynamic().getContext("2d")
-                paint(context2D as CanvasRenderingContext2D)
+                val context = element.asDynamic().getContext("2d") as CanvasRenderingContext2D
+//                context.save()
+                context.clearRect(0.0, 0.0, width, height)
+                paint(context)
+//                context.restore()
              }
         },
         {  }
